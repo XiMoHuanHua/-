@@ -1,0 +1,52 @@
+//分治思想
+/*
+1.确定分界点 x（ 随机、常用r+l/2 ) 
+2.调整区间（一分为二，使左边 <= x   右边 >=x） 
+3.递归处理左右二区间 
+
+如何调整区间？ 
+1、 新开 2个数组  a[] b[] 
+2、 遍历原数组 q[] 若 >x 赋值给 b[]  若 <=x赋值给 a[]
+3、 用a[] b[] 对 q[] 重新赋值
+
+
+如何优雅的调整区间？ 双指针
+1、 i j 从两端向中间移动 
+2、 i遇到 >x的数停下 j遇到 <x的数停下 
+3、 若 i j 都停下后，交换所指的数的值
+4、 继续移动  直至 i与 j相遇或经过  
+*/ 
+//模板 
+#include<bits/stdc++.h>
+using namespace std;
+const int N =1e5;
+
+void quick_sort(int q[],int l,int r){
+	if(l>=r) return;
+	
+	int x=q[l],i=l-1,j=r+1;
+	while(i<j){
+		do i++; while(q[i]<x);
+		do j--; while(q[j]>x);
+		if(i<j){ //swap(q[i],q[j]);
+			int t=q[i];
+			q[i]=q[j];
+			q[j]=t;
+		}
+	}
+	quick_sort(q,l,j);
+	quick_sort(q,j+1,r);
+}
+
+int main (){
+	int n;
+	int q[N];
+	cin>>n;
+	for(int i=0;i<n;i++){
+		scanf("%d",&q[i]);
+	}
+	quick_sort(q,0,n-1);
+	for(int i=0;i<n;i++){
+		printf("%d ",q[i]); 
+	}
+} 
