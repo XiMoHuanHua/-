@@ -1,0 +1,63 @@
+//栈  一种动态集合   用来实现：选进后出 
+/*
+利用数组 s[n] 实现栈的结构： （ s[0] 不放置任何元素） 
+	1、属性 S.top 指向最新插入的元素  
+		s[1] 为栈底元素  s[S.top] 为栈顶元素 
+		S.top = 0 时，栈中无任何元素，栈为空栈 
+		若试图对空栈执行弹出操作，称为栈下溢
+		若 S.top > n ，称为栈上溢 
+	
+	2、栈的常见操作：
+		1)判断栈是否为空： 
+			int S-Empty(s){ 
+				if (S.top==0) return 1;
+				else return 0;
+			}
+		2)压入：
+			push(s,x){
+				S.top++;
+				s[S.top]=x;
+			}
+		3)弹出：
+			pop(s){
+				if(S-Empty(s)) cout<<"enderflow"
+				else S.top--;
+					return s[S.top+1];
+			}
+*/ 
+#include<bits/stdc++.h>
+using namespace std;
+const int N=1e5+7;
+int top=0,x;
+int s[N];
+int s_Empty(int s[]){
+	if(top==0) cout<<"YES"<<endl;
+	else cout<<"NO"<<endl; 
+}
+int push(int s[],int x){
+	top++;
+	s[top]=x;
+}
+int pop(int s[]){
+	cout<<s[top];
+	top--; 
+}
+int  query(int s[]){
+	cout<<s[top]<<endl;
+}
+int main (){
+	int m;
+	string str;
+	cin>>m;
+	while(m--){
+		cin>>str;
+		if(str=="push"){
+			cin>>x;
+			push(s,x);
+		}
+		else if(str=="empty") s_Empty(s);
+		else if(str=="pop") pop(s);
+		else query(s);
+	}
+	
+}
